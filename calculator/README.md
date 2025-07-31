@@ -1,69 +1,38 @@
-# React + TypeScript + Vite
+# Acima Calculator Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for **Acima Calculator**, a web-based calculator that decodes HTML data from the backend and performs mathematical operations between two tables (A and B) defined in that document.
 
-Currently, two official plugins are available:
+## 🧱 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 18+
+- TypeScript
+- Vite
+- Bootstrap 5
+- Axios
+- Vitest (for testing)
+- Docker & Docker Compose
 
-## Expanding the ESLint configuration
+## 🧩 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Fetches a base64-encoded HTML document from the Rails API backend.
+- Decodes and renders tables A and B in an iframe.
+- Allows users to input expressions like `A`, `B`, `A+B`, `A-B`, `A*A`, `B/A`, etc.
+- Displays operation results with styled output.
+- Includes loading spinners, error handling, and dismissible alerts.
+- Uses Docker for development and deployment.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🔗 Backend API
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+The frontend consumes the following endpoint from the Rails backend:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+GET http://localhost:3000/api/v1/html_documents/data_tables
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Response:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```json
+{
+  "filename": "document.html",
+  "content_type": "text/html",
+  "base64": "<base64_encoded_html_content>"
+}
 ```
