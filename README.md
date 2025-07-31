@@ -10,11 +10,13 @@ cd react_calculator_acima
 ```
 
 2. You have 2 options: Docker Compose and install the dependencies Locally, the easier one is to use docker-compose in
+
 2.1 Using Docker Compose: Build the images and run the containers
 ```bash
 docker-compose up --build
 ```
 2.2 Install the dependencies Locally
+
 2.2.1 Backend
  You need to install the dependencies in the backend folder, and first have installed Ruby 3.4.4, Rails 7.2.2.1, and SQLite3
 ```bash
